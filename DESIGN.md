@@ -76,3 +76,7 @@ Length: 99 characters (101 UTF-8 bytes; verified against the written /output/ent
 - Run 1: initial main.py written and run; output copied to entry-check-1.txt and verified.
 - Run 2: re-ran after no further edits; output copied to entry-check-2.txt and
   verified byte-identical to run 1 and to the final line above.
+- Finisher (ronde 2): `validate()` now also rejects control characters
+  (ord < 0x20) — a line carrying one could never pass the gate cleanly, so
+  failing fast here is strictly safer; the line itself is unchanged, and two
+  fresh runs after the edit still hash to the same entry.txt as runs 1–2.

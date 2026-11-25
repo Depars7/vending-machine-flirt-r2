@@ -28,6 +28,8 @@ def validate(line):
     """
     if "\n" in line or "\r" in line:
         raise ValueError("entry must be a single line")
+    if any(ord(ch) < 0x20 for ch in line):
+        raise ValueError("entry must not contain control characters")
     if line != line.strip():
         raise ValueError("entry must not have leading/trailing whitespace")
     if not 1 <= len(line) <= 200:
